@@ -6,11 +6,11 @@ The objective of this project is make an app where the people can see and decide
 The screens the project need to it's MVP.   
 Issues will be created just about theses screens.  
 
-- [] : Create **Main** screen  
-- [] : Create **Products** screen  
-- [] : Create **Product info** screen  
-- [] : Create **Shop Cart** screen  
-- [] : Create **Payment** screen  
+- [ ] : Create **Main** screen  
+- [ ] : Create **Products** screen  
+- [ ] : Create **Product info** screen  
+- [ ] : Create **Shop Cart** screen  
+- [ ] : Create **Payment** screen  
  
 ## Getting Started
 This project is a starting point for a Flutter application.
