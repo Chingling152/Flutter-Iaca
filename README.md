@@ -1,4 +1,4 @@
-# Iaçá - Caca do Açaí
+# Iaçá - Casa do Açaí
 Iaçá is an establishment where natural products and açai(main focus) are sold.  
 The objective of this project is make an app where the people can see and decide what to buy at Iaçá.
 
