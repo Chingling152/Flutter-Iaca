@@ -10,7 +10,7 @@ class HomeState extends State<Home>{
   @override
   Widget build(BuildContext context) {
     return new Center(
-      child: new Text("Work In Progress"),
+      child: new Text("Work In Progress")
     );
   }
 }

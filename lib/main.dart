@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iaca/screens/home/home.dart';
+import 'package:iaca/screens/products/products.dart';
 
 void main() => runApp(IacaApp());
 
@@ -12,7 +13,7 @@ class IacaApp extends StatelessWidget {
       //theme: no,
       initialRoute: "/",
       routes: <String,WidgetBuilder>{
-        "/":(BuildContext context)=> Home()
+        "/":(BuildContext context)=> Products()
       }
     );
   }
