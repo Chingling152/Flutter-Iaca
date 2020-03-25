@@ -1,4 +1,4 @@
-import 'package:iaca/models/prices.dart';
+import 'package:iaca/models/products/prices.dart';
 
 class Product{
   String id;

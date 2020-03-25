@@ -3,35 +3,17 @@ import 'package:http/http.dart' as api;
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:iaca/models/product.dart';
-// useful :
-
 
 class Products extends StatefulWidget{
   @override
-  State<StatefulWidget> createState()=> new ProductState();
+  State<StatefulWidget> createState()=> new ProductsState();
 }
 
-class ProductState extends State<StatefulWidget>{
-  Future<List<Product>> futureProducts;
+class ProductsState extends State<StatefulWidget>{
 
   @override
   void initState(){
     super.initState();
-    futureProducts = getProducts();
-  }
-
-  Future<List<Product>> getProducts() async{
-    final response = await
-    api.get('http://5e7934d0491e9700162de8b7.mockapi.io/api/iaca-products');
-
-    switch(response.statusCode){
-      case 200:
-        Iterable list = json.decode(utf8.decode(response.bodyBytes));
-        return list.map( (product) => Product.fromJson(product)).toList();
-        break;
-    }
-    return null;
   }
 
   @override
@@ -57,7 +39,7 @@ class ProductState extends State<StatefulWidget>{
                 );
               }
 
-              List<Product> productList = products.data;
+              //List<Product> productList = products.data;
               return GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
@@ -68,36 +50,14 @@ class ProductState extends State<StatefulWidget>{
                     return Container(
                       padding: EdgeInsets.all(10),
                       color: Colors.grey,
-                      child: Column(
-                        children: <Widget>[
-                          Text(
-                              productList[index].name,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                fontSize: 12,
-                                color: Colors.black,
-                                decorationStyle: null
-                              ),
-                          ),
-                          Container(
-                            child: Image.network(
-                              productList[index].imageUrl,
-                              height: 100,width:100
-                            )
-                          )
-                        ],
-                      ),
                     );
                   },
-                  itemCount: productList.length
               );
             }else{
               return Text("Carregando...");
             }
 
             },
-          future: futureProducts,
         )
     )
     );
