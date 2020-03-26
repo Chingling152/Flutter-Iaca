@@ -9,24 +9,29 @@ class CustomProduct extends StatefulWidget{
 
 class CustomProductState extends State<StatefulWidget>{
 
+  SandwichRepository repos;
   Future<List<Sandwich>> futureSandwiches;
 
   @override
   void initState(){
     super.initState();
-    futureSandwiches = SandwichRepository.getAll();
+    repos = SandwichRepository();
+    futureSandwiches = repos.getAll();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-        child:Container(
+    return Scaffold(
+      appBar: new AppBar(
+        backgroundColor: Colors.green,
+        title: Text("Ver sandubas"),
+      ),
+        body:Container(
             padding: EdgeInsets.all(20),
             color: Colors.white,
             child:FutureBuilder(
               builder: (context,snapshot){
                 if(snapshot.connectionState == ConnectionState.done) {
-
                   if (!snapshot.hasData) {
                     return Container(
                         padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
@@ -45,47 +50,61 @@ class CustomProductState extends State<StatefulWidget>{
                       itemBuilder: (BuildContext ctx, int index) {
                         return Container(
                           padding: EdgeInsets.all(10),
+                          width: 200,
+                          height: 100,
                           color: Colors.grey,
                           child: Column(
                             children: <Widget>[
-                              Text(
-                                sandwichList[index].name,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 14,
-                                    color: Colors.black
-                                ),
-                              ),
-                              ListView.builder(
-                                itemCount: sandwichList[index].ingredients.length,
-                                itemBuilder: (BuildContext ctx, int ingredientIndex) {
-                                  return Container(
-                                    padding: EdgeInsets.all(10),
-                                    color: Colors.grey,
-                                    child: Column(
-                                      children: <Widget>[
-                                          Text(
-                                            sandwichList[index].ingredients[ingredientIndex].name,
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.black
-                                            )
-                                        )
-                                    ]
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 10),
+                                  child:Text(
+                                    sandwichList[index].name,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 18,
+                                      color: Colors.black,
+                                    ),
                                   )
-                                );
-                                }
-                            )
+                              )
+                              ,
+                              ListView.builder(
+                                shrinkWrap: true,
+                                    itemCount: sandwichList[index].ingredients.length,
+                                    itemBuilder: (BuildContext ctx, int ingredient) {
+                                      return Container(
+                                          padding: EdgeInsets.only(top:5),
+                                          color: Colors.white10,
+                                          child: Text(
+                                                    sandwichList[index].ingredients[ingredient].name,
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        color: Colors.black
+                                                    )
+                                                )
+                                      );
+                                    }
+                                )
                             ],
-                          ),
+                          )
                         );
                       },
                       itemCount: sandwichList.length
                   );
                 }else{
-                  return Text("Carregando...");
+                  return Padding(
+                    padding: EdgeInsets.all(30),
+                    child: Center(
+                      heightFactor: 500,
+                      child: Column(
+                        children: <Widget>[
+                          Text("Carregando..."),
+                          CircularProgressIndicator()
+                        ],
+                      ),
+                    )
+                  );
                 }
               },
               future: futureSandwiches,

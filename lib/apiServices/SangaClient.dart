@@ -16,11 +16,11 @@ class SangaClient{
     _http = Http(url);
     _authorizationToken = authorizationToken;
     _apiKey = apiKey;//isso sim ;-;
-    _customHeaders = customHeaders;//isso não existe
+    //_customHeaders = customHeaders;//isso não existe
   }
 
   get({endpoint:""}) async{
-    var response = await _http.fetchAsync(endpoint,"GET",authorizationToken:_authorizationToken,customHeaders:_customHeaders);
+    var response = await _http.fetchAsync(endpoint,"GET",authorizationToken:_authorizationToken,customHeaders:{"key":_apiKey});
     switch(response.statusCode){
       case 200:
         return json.decode(utf8.decode(response.bodyBytes));
@@ -30,7 +30,7 @@ class SangaClient{
   }
 
   post({endpoint:"",String authorizationToken,Map customHeaders,body}) async{
-    var response = await _http.fetchAsync(endpoint,"POST",authorizationToken:_authorizationToken,customHeaders:_customHeaders,body:body);
+    var response = await _http.fetchAsync(endpoint,"POST",authorizationToken:_authorizationToken,customHeaders:{"key":_apiKey},body:body);
     switch(response.statusCode){
       case 200:
         return json.decode(utf8.decode(response.bodyBytes));
@@ -40,7 +40,7 @@ class SangaClient{
   }
 
   put({endpoint:"",String authorizationToken,Map customHeaders,body}) async{
-    var response = await _http.fetchAsync(endpoint,"PUT",authorizationToken:authorizationToken,customHeaders:customHeaders,body:body);
+    var response = await _http.fetchAsync(endpoint,"PUT",authorizationToken:authorizationToken,customHeaders:{"key":_apiKey},body:body);
     switch(response.statusCode){
       case 200:
         return json.decode(utf8.decode(response.bodyBytes));
@@ -50,7 +50,7 @@ class SangaClient{
   }
 
   delete({endpoint:"",String authorizationToken,Map customHeaders}) async{
-    var response = await _http.fetchAsync(endpoint,"DELETE",authorizationToken:authorizationToken,customHeaders:customHeaders);
+    var response = await _http.fetchAsync(endpoint,"DELETE",authorizationToken:authorizationToken,customHeaders:{"key":_apiKey});
     switch(response.statusCode){
       case 200:
         return json.decode(utf8.decode(response.bodyBytes));

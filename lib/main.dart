@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iaca/screens/products/product/customProduct.dart';
+import 'package:iaca/screens/products/product/product.dart';
 
 void main() => runApp(IacaApp());
 
@@ -12,7 +12,7 @@ class IacaApp extends StatelessWidget {
       //theme: no,
       initialRoute: "/",
       routes: <String,WidgetBuilder>{
-        "/":(BuildContext context)=> CustomProduct()
+        "/":(BuildContext context)=> Product()
       }
     );
   }
